@@ -17,6 +17,9 @@ class WPSM_My_Account {
         
         // Handle form submission
         add_action('template_redirect', array(__CLASS__, 'handle_ticket_submission'));
+
+        // Handle reply submission
+        add_action('template_redirect', array(__CLASS__, 'handle_ticket_reply'));
     }
     
     /**
@@ -45,13 +48,25 @@ class WPSM_My_Account {
      * Endpoint content
      */
     public static function endpoint_content() {
+        // Check if viewing a single ticket
+        $ticket_id = isset($_GET['ticket_id']) ? absint($_GET['ticket_id']) : 0;
+    
         // Load the appropriate template
-        wc_get_template(
-            'myaccount/support-tickets.php',
-            array(),
-            'woocommerce-product-support-manager/',
-            WPSM_PLUGIN_DIR . 'templates/'
-        );
+        if ($ticket_id) {
+            wc_get_template(
+                'myaccount/single-ticket.php',
+                array('ticket_id' => $ticket_id),
+                'woocommerce-product-support-manager/',
+                WPSM_PLUGIN_DIR . 'templates/'
+            );
+        } else {
+            wc_get_template(
+                'myaccount/support-tickets.php',
+                array(),
+                'woocommerce-product-support-manager/',
+                WPSM_PLUGIN_DIR . 'templates/'
+            );
+        }
     }
     
     /**
@@ -103,6 +118,55 @@ class WPSM_My_Account {
             exit;
         } else {
             wc_add_notice(__('There was an error submitting your ticket. Please try again.', 'woo-product-support'), 'error');
+        }
+    }
+
+    /**
+     * Handle the ticket reply submission
+     */
+    public static function handle_ticket_reply() {
+        if (!isset($_POST['wpsm_add_reply']) || 
+            !wp_verify_nonce($_POST['wpsm_reply_nonce'], 'wpsm_add_reply')) {
+            return;
+        }
+        
+        $ticket_id = isset($_POST['ticket_id']) ? absint($_POST['ticket_id']) : 0;
+        $reply_content = isset($_POST['ticket_reply']) ? wp_kses_post($_POST['ticket_reply']) : '';
+        
+        if (!$ticket_id || !$reply_content) {
+            wc_add_notice(__('Invalid request.', 'woo-product-support'), 'error');
+            return;
+        }
+        
+        // Check if user owns the ticket
+        $ticket = get_post($ticket_id);
+        if (!$ticket || $ticket->post_author != get_current_user_id()) {
+            wc_add_notice(__('You don\'t have permission to reply to this ticket.', 'woo-product-support'), 'error');
+            return;
+        }
+        
+        // Add the reply
+        $reply_data = array(
+            'comment_post_ID' => $ticket_id,
+            'comment_content' => $reply_content,
+            'user_id' => get_current_user_id(),
+            'comment_type' => 'ticket_reply'
+        );
+        
+        $reply_id = wp_insert_comment($reply_data);
+        
+        if ($reply_id) {
+            // Update ticket status to in-progress if it was open
+            if (get_post_status($ticket_id) === 'ticket_open') {
+                wp_update_post(array(
+                    'ID' => $ticket_id,
+                    'post_status' => 'ticket_in_progress'
+                ));
+            }
+            
+            wc_add_notice(__('Your reply has been submitted successfully.', 'woo-product-support'), 'success');
+        } else {
+            wc_add_notice(__('There was an error submitting your reply. Please try again.', 'woo-product-support'), 'error');
         }
     }
     

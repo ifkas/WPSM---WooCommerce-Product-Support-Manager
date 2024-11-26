@@ -48,9 +48,9 @@ $tickets = get_posts($args);
                             <?php echo esc_html(date_i18n(get_option('date_format'), strtotime($ticket->post_date))); ?>
                         </td>
                         <td>
-                            <a href="#" class="button view">
-                                <?php _e('View', 'woo-product-support'); ?>
-                            </a>
+                        <a href="<?php echo esc_url(add_query_arg('ticket_id', $ticket->ID, wc_get_account_endpoint_url('support-tickets'))); ?>" class="button view">
+                            <?php _e('View', 'woo-product-support'); ?>
+                        </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
