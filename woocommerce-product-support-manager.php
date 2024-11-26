@@ -80,15 +80,15 @@ function wpsm_init() {
     if (wpsm_is_woocommerce_active()) {
         // Load required files
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-post-types.php';
-        require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-ticket-status.php';
-        require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-my-account.php';
-        require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-admin.php';
+        // require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-ticket-status.php';
+        // require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-my-account.php';
+        // require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-admin.php';
         
         // Initialize classes
         WPSM_Post_Types::init();
-        WPSM_Ticket_Status::init();
-        WPSM_My_Account::init();
-        WPSM_Admin::init();
+        // WPSM_Ticket_Status::init();
+        // WPSM_My_Account::init();
+        // WPSM_Admin::init();
         
         // Load text domain
         load_plugin_textdomain('woo-product-support', false, dirname(WPSM_PLUGIN_BASENAME) . '/languages');
