@@ -1,30 +1,30 @@
-**#** **WooCommerce Product Support Manager**
+# WooCommerce Product Support Manager
 
 A comprehensive product support ticket system for WooCommerce that enables customers to create and manage support tickets directly from their account dashboard.
 
-**##** **Features**
+## Features
 
-- **\*\*\*\***Customer Support Portal**\*\*\*\***
+- **Customer Support Portal**
 
   - Submit new support tickets
   - View existing tickets and their status
   - Reply to admin responses
   - Associate tickets with purchased products
 
-- **\*\*\*\***Admin Dashboard Integration**\*\*\*\***
+- **Admin Dashboard Integration**
   - Manage all support tickets from WordPress admin
   - Reply to customer tickets
   - Change ticket status (Open, In Progress, Resolved)
   - View customer and product details
   - Track conversation history
 
-**##** **Requirements**
+## Requirements
 
 - WordPress 6.0 or higher
 - WooCommerce 6.0 or higher
 - PHP 8 or higher
 
-**##** **Installation**
+## Installation
 
 1. Download the plugin zip file
 2. Go to WordPress admin > Plugins > Add New
@@ -32,9 +32,9 @@ A comprehensive product support ticket system for WooCommerce that enables custo
 4. Click "Install Now"
 5. Activate the plugin
 
-**##** **Usage**
+## Usage
 
-**###** **For Customers**
+### For Customers
 
 1. Log in to your account on the WooCommerce store
 2. Navigate to "My Account" > "Support Tickets"
@@ -46,7 +46,7 @@ A comprehensive product support ticket system for WooCommerce that enables custo
 5. Submit the ticket and wait for admin response
 6. Reply to admin responses as needed
 
-**###** **For Administrators**
+### For Administrators
 
 1. Access WordPress admin dashboard
 2. Go to "Support Tickets" in the main menu
@@ -57,19 +57,23 @@ A comprehensive product support ticket system for WooCommerce that enables custo
    - View customer details
    - See related product information
 
-**##** **Configuration**
+## Configuration
 
 No additional configuration is required. The plugin works out of the box after activation.
+
+---
 
 **License**
 This plugin is licensed under the GPL v2 or later.
 
-Credits
+**Credits**
 Developed by [Ivo Culic](https://ivoculic.dev)
 
 **Changelog**
 
-- 1.0.0 Initial release
+**1.0.0**
+
+- Initial release
 - Basic ticket management system
 - Customer support portal
 - Admin dashboard integration
