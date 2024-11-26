@@ -31,7 +31,7 @@ class WPSM_Post_Types {
                     'not_found'            => __('No tickets found', 'woo-product-support'),
                     'not_found_in_trash'   => __('No tickets found in trash', 'woo-product-support'),
                 ),
-                'description'           => __('This is where support tickets are stored.', 'woo-product-support'),
+                'description'          => __('This is where support tickets are stored.', 'woo-product-support'),
                 'public'               => false,
                 'show_ui'              => true,
                 'capability_type'      => 'post',
@@ -43,9 +43,11 @@ class WPSM_Post_Types {
                 'supports'            => array('title', 'editor', 'comments'),
                 'has_archive'         => false,
                 'show_in_nav_menus'   => false,
+                'show_in_menu'        => true,
+                'menu_position'       => 56,    // Position after WooCommerce
                 'menu_icon'           => 'dashicons-sos',
-                'show_in_rest' => true,
-                'rest_base' => false
+                'show_in_rest'        => true,
+                'rest_base'           => false
             )
         );
     }
