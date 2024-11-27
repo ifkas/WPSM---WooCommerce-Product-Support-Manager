@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 class WPSM_Assets {
+
     public static function init() {
         add_action('wp_enqueue_scripts', array(__CLASS__, 'enqueue_frontend_assets'));
         add_action('admin_enqueue_scripts', array(__CLASS__, 'enqueue_admin_assets'));
@@ -62,10 +63,14 @@ class WPSM_Assets {
             true
         );
 
-        // Add any localized script data
+        // Add any localized script data plus i18n support
         wp_localize_script('wpsm-admin-scripts', 'wpsmAdmin', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('wpsm_admin_nonce')
+            'nonce' => wp_create_nonce('wpsm_admin_nonce'),
+            'i18n' => array(
+                'pleaseEnterReply' => __('Please enter a reply message.', 'woo-product-support'),
+                'errorOccurred' => __('An error occurred while processing your request.', 'woo-product-support')
+            )
         ));
     }
 }

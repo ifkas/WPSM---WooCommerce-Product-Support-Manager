@@ -9,25 +9,16 @@ class WPSM_Admin {
      * Init admin func
      */
     public static function init() {
-        // Add custom columns to tickets list
+        // Existing filters and actions
         add_filter('manage_support_ticket_posts_columns', array(__CLASS__, 'set_custom_columns'));
         add_action('manage_support_ticket_posts_custom_column', array(__CLASS__, 'render_custom_columns'), 10, 2);
-        
-        // Add sortable columns
         add_filter('manage_edit-support_ticket_sortable_columns', array(__CLASS__, 'set_sortable_columns'));
-        
-        // Add meta boxes
+        // TODO: Create the meta boxes separately new class
         add_action('add_meta_boxes', array(__CLASS__, 'add_meta_boxes'));
         
-        // Save ticket meta
-        add_action('save_post_support_ticket', array(__CLASS__, 'save_ticket_meta'), 10, 2);
-        add_action('admin_init', array(__CLASS__, 'handle_ticket_reply'));
-
-            // Add handler for reply submission
-    add_action('admin_post_wpsm_submit_ticket_reply', array(__CLASS__, 'handle_ticket_reply'));
-
-    add_action('wp_ajax_wpsm_submit_reply', array(__CLASS__, 'handle_ticket_reply_ajax'));
-
+        // AJAX handlers
+        add_action('wp_ajax_wpsm_submit_reply', array(__CLASS__, 'handle_ticket_reply_ajax'));
+        add_action('wp_ajax_wpsm_update_ticket_details', array(__CLASS__, 'handle_ticket_details_ajax'));
     }
     
     /**
@@ -141,7 +132,6 @@ class WPSM_Admin {
     /**
      * Render reply meta box
      */
-    // TODO: Make style and script enqueued and separated
     public static function render_reply_meta_box($post) {
         wp_nonce_field('wpsm_ticket_reply', 'wpsm_ticket_reply_nonce');
         ?>
@@ -203,198 +193,15 @@ class WPSM_Admin {
                 </div>
             </div>
         </div>
-
-        <script>
-        jQuery(document).ready(function($) {
-            $('#submit_ticket_reply').on('click', function() {
-                var $button = $(this);
-                var $spinner = $('.spinner');
-                var reply = $('#ticket_reply').val();
-                
-                if (!reply) {
-                    alert('<?php esc_html_e('Please enter a reply message.', 'woo-product-support'); ?>');
-                    return;
-                }
-                
-                // Disable button and show spinner
-                $button.prop('disabled', true);
-                $spinner.addClass('is-active');
-                
-                $.ajax({
-                    url: ajaxurl,
-                    type: 'POST',
-                    data: {
-                        action: 'wpsm_submit_reply',
-                        post_id: <?php echo esc_js($post->ID); ?>,
-                        reply: reply,
-                        mark_resolved: $('#mark_resolved').is(':checked') ? 1 : 0,
-                        nonce: $('#wpsm_ticket_reply_nonce').val()
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            // Clear textarea
-                            $('#ticket_reply').val('');
-                            
-                            // Reload page to show new reply
-                            location.reload();
-                        } else {
-                            alert(response.data.message || '<?php esc_html_e('Error submitting reply.', 'woo-product-support'); ?>');
-                        }
-                    },
-                    error: function() {
-                        alert('<?php esc_html_e('Error submitting reply. Please try again.', 'woo-product-support'); ?>');
-                    },
-                    complete: function() {
-                        // Re-enable button and hide spinner
-                        $button.prop('disabled', false);
-                        $spinner.removeClass('is-active');
-                    }
-                });
-            });
-        });
-        </script>
         <?php
-    }
-
-    /**
-     * Handle ticket reply submission via AJAX
-     */
-    public static function handle_ticket_reply_ajax() {
-        // Verify nonce
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'wpsm_ticket_reply')) {
-            wp_send_json_error(array('message' => 'Security check failed'));
-        }
-
-        // Check permissions
-        if (!current_user_can('edit_posts')) {
-            wp_send_json_error(array('message' => 'Permission denied'));
-        }
-
-        // Get and validate data
-        $post_id = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0;
-        $reply = isset($_POST['reply']) ? wp_kses_post($_POST['reply']) : '';
-        $mark_resolved = isset($_POST['mark_resolved']) && $_POST['mark_resolved'] == 1;
-
-        if (!$post_id || empty($reply)) {
-            wp_send_json_error(array('message' => 'Please provide a reply message'));
-        }
-
-        // Create the comment/reply
-        $comment_data = array(
-            'comment_post_ID'      => $post_id,
-            'comment_content'      => $reply,
-            'user_id'             => get_current_user_id(),
-            'comment_type'        => 'ticket_reply',
-            'comment_approved'    => 1,
-            'comment_author'      => wp_get_current_user()->display_name,
-            'comment_author_email'=> wp_get_current_user()->user_email
-        );
-
-        $comment_id = wp_insert_comment($comment_data);
-
-        if ($comment_id) {
-            // Update ticket status if needed
-            if ($mark_resolved) {
-                wp_update_post(array(
-                    'ID' => $post_id,
-                    'post_status' => 'ticket_resolved'
-                ));
-            } else {
-                $current_status = get_post_status($post_id);
-                if ($current_status === 'ticket_open') {
-                    wp_update_post(array(
-                        'ID' => $post_id,
-                        'post_status' => 'ticket_in_progress'
-                    ));
-                }
-            }
-
-            wp_send_json_success(array('message' => 'Reply added successfully'));
-        }
-
-        wp_send_json_error(array('message' => 'Error adding reply'));
-    }
-
-    /**
-     * Handle ticket reply submission
-     */
-    public static function handle_ticket_reply() {
-        error_log('POST data: ' . print_r($_POST, true));
-        // Check if this is a reply submission
-        if (!isset($_POST['wpsm_submit_reply'])) {
-            return;
-        }
-
-        // Verify nonce
-        if (!isset($_POST['wpsm_ticket_reply_nonce']) || 
-            !wp_verify_nonce($_POST['wpsm_ticket_reply_nonce'], 'wpsm_ticket_reply')) {
-            wp_die('Security check failed');
-        }
-
-        // Get and validate data
-        $post_id = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0;
-        $reply = isset($_POST['ticket_reply']) ? wp_kses_post($_POST['ticket_reply']) : '';
-        $mark_resolved = isset($_POST['mark_resolved']);
-
-        if (!$post_id || empty($reply)) {
-            wp_die('Please provide a reply message.');
-        }
-
-        // Create the comment/reply
-        $comment_data = array(
-            'comment_post_ID'      => $post_id,
-            'comment_content'      => $reply,
-            'user_id'             => get_current_user_id(),
-            'comment_type'        => 'ticket_reply',
-            'comment_approved'    => 1,
-            'comment_author'      => wp_get_current_user()->display_name,
-            'comment_author_email'=> wp_get_current_user()->user_email
-        );
-
-        $comment_id = wp_insert_comment($comment_data);
-
-        if ($comment_id) {
-            // Update ticket status if needed
-            if ($mark_resolved) {
-                wp_update_post(array(
-                    'ID' => $post_id,
-                    'post_status' => 'ticket_resolved'
-                ));
-            } else {
-                // Update status to in-progress if it's currently open
-                $current_status = get_post_status($post_id);
-                if ($current_status === 'ticket_open') {
-                    wp_update_post(array(
-                        'ID' => $post_id,
-                        'post_status' => 'ticket_in_progress'
-                    ));
-                }
-            }
-
-            // Add success message as a transient
-            add_settings_error(
-                'wpsm_messages',
-                'wpsm_reply_added',
-                __('Reply added successfully.', 'woo-product-support'),
-                'updated'
-            );
-
-            // Redirect to prevent form resubmission
-            wp_redirect(add_query_arg(array(
-                'post' => $post_id,
-                'action' => 'edit',
-                'message' => 1
-            ), admin_url('post.php')));
-            exit;
-        }
-
-        wp_die('Error adding reply. Please try again.');
     }
     
     /**
      * Render details meta box
      */
     public static function render_details_meta_box($post) {
+        wp_nonce_field('wpsm_admin_nonce', 'wpsm_ticket_details_nonce');
+        
         $customer_id = get_post_meta($post->ID, '_ticket_customer_id', true);
         $product_id = get_post_meta($post->ID, '_ticket_product_id', true);
         $priority = get_post_meta($post->ID, '_ticket_priority', true);
@@ -428,7 +235,7 @@ class WPSM_Admin {
             </p>
             <p>
                 <strong><?php _e('Priority:', 'woo-product-support'); ?></strong><br>
-                <select name="ticket_priority" style="width: 100%;">
+                <select name="ticket_priority" id="ticket_priority" style="width: 100%;">
                     <option value="low" <?php selected($priority, 'low'); ?>><?php _e('Low', 'woo-product-support'); ?></option>
                     <option value="medium" <?php selected($priority, 'medium'); ?>><?php _e('Medium', 'woo-product-support'); ?></option>
                     <option value="high" <?php selected($priority, 'high'); ?>><?php _e('High', 'woo-product-support'); ?></option>
@@ -437,33 +244,117 @@ class WPSM_Admin {
             </p>
             <p>
                 <strong><?php _e('Status:', 'woo-product-support'); ?></strong><br>
-                <select name="post_status" style="width: 100%;">
+                <select name="post_status" id="ticket_status" style="width: 100%;">
                     <option value="ticket_open" <?php selected($post->post_status, 'ticket_open'); ?>><?php _e('Open', 'woo-product-support'); ?></option>
                     <option value="ticket_in_progress" <?php selected($post->post_status, 'ticket_in_progress'); ?>><?php _e('In Progress', 'woo-product-support'); ?></option>
                     <option value="ticket_resolved" <?php selected($post->post_status, 'ticket_resolved'); ?>><?php _e('Resolved', 'woo-product-support'); ?></option>
                 </select>
             </p>
+            <div class="wpsm-details-actions">
+                <button type="button" id="update_ticket_details" class="button button-primary">
+                    <?php esc_html_e('Update Details', 'woo-product-support'); ?>
+                </button>
+                <span class="spinner" style="float: none; margin: 0 10px;"></span>
+            </div>
         </div>
         <?php
     }
-    
-    /**
-     * Save ticket meta
+
+        /**
+     * Handle ticket reply submission via AJAX
      */
-    public static function save_ticket_meta($post_id, $post) {
-        // If this is an autosave, our form has not been submitted
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            return;
+    public static function handle_ticket_reply_ajax() {
+        // Verify nonce
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'wpsm_admin_nonce')) {
+            wp_send_json_error(array('message' => __('Security check failed', 'woo-product-support')));
         }
 
-        // Check user permissions
-        if (!current_user_can('edit_post', $post_id)) {
-            return;
+        // Check permissions
+        if (!current_user_can('edit_posts')) {
+            wp_send_json_error(array('message' => __('Permission denied', 'woo-product-support')));
         }
 
-        // Save priority if set
-        if (isset($_POST['ticket_priority'])) {
-            update_post_meta($post_id, '_ticket_priority', sanitize_text_field($_POST['ticket_priority']));
+        // Get and validate data
+        $post_id = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0;
+        $reply = isset($_POST['reply']) ? wp_kses_post($_POST['reply']) : '';
+        $mark_resolved = isset($_POST['mark_resolved']) && $_POST['mark_resolved'] == 1;
+
+        if (!$post_id || empty($reply)) {
+            wp_send_json_error(array('message' => __('Please provide a reply message', 'woo-product-support')));
         }
+
+        // Create the comment/reply
+        $comment_data = array(
+            'comment_post_ID' => $post_id,
+            'comment_content' => $reply,
+            'user_id' => get_current_user_id(),
+            'comment_type' => 'ticket_reply',
+            'comment_approved' => 1,
+            'comment_author' => wp_get_current_user()->display_name,
+            'comment_author_email' => wp_get_current_user()->user_email
+        );
+
+        $comment_id = wp_insert_comment($comment_data);
+
+        if ($comment_id) {
+            if ($mark_resolved) {
+                wp_update_post(array(
+                    'ID' => $post_id,
+                    'post_status' => 'ticket_resolved'
+                ));
+            } else {
+                $current_status = get_post_status($post_id);
+                if ($current_status === 'ticket_open') {
+                    wp_update_post(array(
+                        'ID' => $post_id,
+                        'post_status' => 'ticket_in_progress'
+                    ));
+                }
+            }
+
+            wp_send_json_success(array('message' => __('Reply added successfully', 'woo-product-support')));
+        }
+
+        wp_send_json_error(array('message' => __('Error adding reply', 'woo-product-support')));
+    }
+
+    public static function handle_ticket_details_ajax() {
+        // Verify nonce
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'wpsm_admin_nonce')) {
+            wp_send_json_error(array('message' => __('Security check failed', 'woo-product-support')));
+        }
+
+        // Check permissions
+        if (!current_user_can('edit_posts')) {
+            wp_send_json_error(array('message' => __('Permission denied', 'woo-product-support')));
+        }
+
+        // Get and validate data
+        $post_id = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0;
+        $priority = isset($_POST['priority']) ? sanitize_text_field($_POST['priority']) : '';
+        $status = isset($_POST['status']) ? sanitize_text_field($_POST['status']) : '';
+
+        if (!$post_id) {
+            wp_send_json_error(array('message' => __('Invalid ticket ID', 'woo-product-support')));
+        }
+
+        // Update priority
+        if ($priority) {
+            update_post_meta($post_id, '_ticket_priority', $priority);
+        }
+
+        // Update status
+        if ($status) {
+            wp_update_post(array(
+                'ID' => $post_id,
+                'post_status' => $status
+            ));
+        }
+
+        wp_send_json_success(array(
+            'message' => __('Ticket details updated successfully', 'woo-product-support'),
+            'priority' => $priority,
+            'status' => $status
+        ));
     }
 }
