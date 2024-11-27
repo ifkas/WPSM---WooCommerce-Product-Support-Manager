@@ -15,6 +15,7 @@ A comprehensive product support ticket system for WooCommerce that enables custo
   - Manage all support tickets from WordPress admin
   - Reply to customer tickets
   - Change ticket status (Open, In Progress, Resolved)
+  - Change ticket priority (Low, Medium, High, Urgent)
   - View customer and product details
   - Track conversation history
 
@@ -45,6 +46,7 @@ A comprehensive product support ticket system for WooCommerce that enables custo
    - Set priority (if applicable)
 5. Submit the ticket and wait for admin response
 6. Reply to admin responses as needed
+7. Preview all your current or previous tickets
 
 ### For Administrators
 
@@ -54,6 +56,7 @@ A comprehensive product support ticket system for WooCommerce that enables custo
    - Read customer messages
    - Add replies
    - Change ticket status
+   - Change ticket priority
    - View customer details
    - See related product information
 
