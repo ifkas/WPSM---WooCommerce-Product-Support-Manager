@@ -84,6 +84,7 @@ function wpsm_init() {
         // require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-ticket-status.php';
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-my-account.php';
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-admin.php';
+        require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-assets.php';
         
         // Initialize classes
         WPSM_Post_Types::init();
@@ -91,6 +92,7 @@ function wpsm_init() {
         // WPSM_Ticket_Status::init();
         WPSM_My_Account::init();
         WPSM_Admin::init();
+        WPSM_Assets::init();
         
         // Load text domain
         load_plugin_textdomain('woo-product-support', false, dirname(WPSM_PLUGIN_BASENAME) . '/languages');

@@ -50,7 +50,7 @@ $replies = get_comments(array(
             <span class="wpsm-ticket-date">
                 <?php 
                 printf(
-                    __('Created on %s', 'woo-product-support'),
+                    __('Created on: %s', 'woo-product-support'),
                     date_i18n(get_option('date_format') . ' ' . get_option('time_format'), strtotime($ticket->post_date))
                 );
                 ?>
@@ -61,12 +61,12 @@ $replies = get_comments(array(
     <!-- Product information -->
     <?php if ($product) : ?>
     <div class="wpsm-product-info">
-        <h3><?php _e('Related Product', 'woo-product-support'); ?></h3>
-        <p>
+        <h3><?php _e('Related Product:', 'woo-product-support'); ?></h3>
+        <span>
             <a href="<?php echo esc_url($product->get_permalink()); ?>" target="_blank">
                 <?php echo esc_html($product->get_name()); ?>
             </a>
-        </p>
+        </span>
     </div>
     <?php endif; ?>
 
@@ -137,86 +137,3 @@ $replies = get_comments(array(
         </div>
     <?php endif; ?>
 </div>
-
-<style>
-.wpsm-single-ticket {
-    max-width: 800px;
-    margin: 0 auto;
-}
-.wpsm-ticket-header {
-    margin-bottom: 30px;
-}
-.wpsm-ticket-meta {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-}
-.wpsm-ticket-status,
-.wpsm-ticket-priority {
-    padding: 3px 8px;
-    border-radius: 3px;
-    font-size: 0.9em;
-}
-.wpsm-ticket-status.status-ticket_open {
-    background: #ffeeba;
-    color: #856404;
-}
-.wpsm-ticket-status.status-ticket_in_progress {
-    background: #b8daff;
-    color: #004085;
-}
-.wpsm-ticket-status.status-ticket_resolved {
-    background: #c3e6cb;
-    color: #155724;
-}
-.wpsm-ticket-priority.priority-urgent {
-    background: #f8d7da;
-    color: #721c24;
-}
-.wpsm-ticket-priority.priority-high {
-    background: #ffeeba;
-    color: #856404;
-}
-.wpsm-message-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.wpsm-message-author {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.wpsm-message-author img {
-    border-radius: 50%;
-}
-.wpsm-message-content {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-.staff-badge {
-    background: #6c757d;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 0.8em;
-}
-.staff-reply .wpsm-message-content {
-    background: #e9ecef;
-}
-.wpsm-reply-form {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #dee2e6;
-}
-.wpsm-reply-form textarea {
-    width: 100%;
-    min-height: 150px;
-}
-.wpsm-back-link {
-    margin-bottom: 20px;
-}
-</style>

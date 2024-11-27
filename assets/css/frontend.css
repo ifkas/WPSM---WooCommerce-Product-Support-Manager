@@ -1,0 +1,119 @@
+/* Frontend styles */
+/* Ticket form and list */
+.wpsm-new-ticket-form .form-row {
+  margin-bottom: 20px;
+}
+.wpsm-new-ticket-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+.wpsm-new-ticket-form .input-text,
+.wpsm-new-ticket-form .select {
+  width: 100%;
+  padding: 8px;
+}
+.wpsm-new-ticket-form textarea {
+  width: 100%;
+  min-height: 150px;
+}
+.wpsm-support-tickets table {
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+/* Single ticket */
+.wpsm-single-ticket {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.wpsm-ticket-header {
+  margin-bottom: 30px;
+}
+.wpsm-ticket-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.wpsm-ticket-meta span {
+  padding: 10px;
+  border: 1px solid #ccc;
+  flex-grow: 1;
+  text-align: center;
+  font-size: 15px;
+}
+.wpsm-ticket-status,
+.wpsm-ticket-priority {
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+.wpsm-ticket-status.status-ticket_open {
+  background: #ffeeba;
+  color: #856404;
+}
+.wpsm-ticket-status.status-ticket_in_progress {
+  background: #b8daff;
+  color: #004085;
+}
+.wpsm-ticket-status.status-ticket_resolved {
+  background: #c3e6cb;
+  color: #155724;
+}
+.wpsm-ticket-priority.priority-urgent {
+  background: #f8d7da;
+  color: #721c24;
+}
+.wpsm-ticket-priority.priority-high {
+  background: #ffeeba;
+  color: #856404;
+}
+.wpsm-message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.wpsm-product-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wpsm-message-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wpsm-message-author img {
+  border-radius: 50%;
+}
+.wpsm-message-content {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+.staff-badge {
+  background: #6c757d;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.8em;
+}
+.staff-reply .wpsm-message-content {
+  background: #e9ecef;
+}
+.wpsm-reply-form {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #dee2e6;
+}
+.wpsm-reply-form textarea {
+  width: 100%;
+  min-height: 150px;
+}
+.wpsm-back-link {
+  margin-bottom: 20px;
+}

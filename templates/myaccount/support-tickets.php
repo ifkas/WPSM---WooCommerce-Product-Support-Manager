@@ -17,7 +17,7 @@ $tickets = get_posts($args);
 <div class="wpsm-support-tickets">
     <!-- Ticket List -->
     <?php if (!empty($tickets)) : ?>
-        <h2><?php _e('Your Support Tickets', 'woo-product-support'); ?></h2>
+        <h3><?php _e('Your Support Tickets', 'woo-product-support'); ?></h3>
         <table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table shop_table_responsive">
             <thead>
                 <tr>
@@ -49,7 +49,7 @@ $tickets = get_posts($args);
                         </td>
                         <td>
                         <a href="<?php echo esc_url(add_query_arg('ticket_id', $ticket->ID, wc_get_account_endpoint_url('support-tickets'))); ?>" class="button view">
-                            <?php _e('View', 'woo-product-support'); ?>
+                            <strong><?php _e('View', 'woo-product-support'); ?></strong>
                         </a>
                         </td>
                     </tr>
@@ -59,7 +59,7 @@ $tickets = get_posts($args);
     <?php endif; ?>
 
     <!-- New Ticket Form -->
-    <h2><?php _e('Submit New Support Ticket', 'woo-product-support'); ?></h2>
+    <h3><?php _e('Submit New Support Ticket', 'woo-product-support'); ?></h3>
     
     <?php 
     $purchased_products = WPSM_My_Account::get_customer_purchased_products();
@@ -112,7 +112,7 @@ $tickets = get_posts($args);
 </div>
 
 <style>
-.wpsm-new-ticket-form .form-row {
+/* .wpsm-new-ticket-form .form-row {
     margin-bottom: 20px;
 }
 .wpsm-new-ticket-form label {
@@ -130,5 +130,5 @@ $tickets = get_posts($args);
 }
 .wpsm-support-tickets table {
     margin-bottom: 40px;
-}
+} */
 </style>
