@@ -5,13 +5,27 @@ if (!defined('ABSPATH')) {
 
 // Get customer's tickets
 $args = array(
-    'post_type' => 'support_ticket',
-    'post_status' => array('ticket_open', 'ticket_in_progress', 'ticket_resolved'),
-    'author' => get_current_user_id(),
+    'post_type'      => 'support_ticket',
+    'post_status'    => array('ticket_open', 'ticket_in_progress', 'ticket_resolved', 'publish'),
+    'author'         => get_current_user_id(),
     'posts_per_page' => -1
 );
 
 $tickets = get_posts($args);
+
+// Leave this for debugging
+// error_log('Found ' . count($tickets) . ' tickets');
+
+// $debug_args = array(
+//     'post_type'      => 'support_ticket',
+//     'post_status'    => 'any',
+//     'author'         => get_current_user_id(),
+//     'posts_per_page' => -1
+// );
+// $all_tickets = get_posts($debug_args);
+// foreach ($all_tickets as $ticket) {
+//     error_log('Ticket ID: ' . $ticket->ID . ' Status: ' . get_post_status($ticket->ID));
+// }
 ?>
 
 <div class="wpsm-support-tickets">
@@ -110,25 +124,3 @@ $tickets = get_posts($args);
         </form>
     <?php endif; ?>
 </div>
-
-<style>
-/* .wpsm-new-ticket-form .form-row {
-    margin-bottom: 20px;
-}
-.wpsm-new-ticket-form label {
-    display: block;
-    margin-bottom: 5px;
-}
-.wpsm-new-ticket-form .input-text,
-.wpsm-new-ticket-form .select {
-    width: 100%;
-    padding: 8px;
-}
-.wpsm-new-ticket-form textarea {
-    width: 100%;
-    min-height: 150px;
-}
-.wpsm-support-tickets table {
-    margin-bottom: 40px;
-} */
-</style>
