@@ -78,6 +78,7 @@ add_action('plugins_loaded', 'wpsm_init');
 
 function wpsm_init() {
     if (wpsm_is_woocommerce_active()) {
+
         // Load required files
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-post-types.php';
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-ticket-meta.php';
@@ -85,6 +86,7 @@ function wpsm_init() {
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-my-account.php';
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-admin.php';
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-assets.php';
+        require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-emails.php';
         
         // Initialize classes
         WPSM_Post_Types::init();
@@ -93,9 +95,25 @@ function wpsm_init() {
         WPSM_My_Account::init();
         WPSM_Admin::init();
         WPSM_Assets::init();
+        WPSM_Emails::init();
+
+        // Send email notifications - hooks
+        add_action('wp_insert_post', function($post_id, $post) {
+            if ($post->post_type === 'support_ticket' && $post->post_status === 'ticket_open') {
+                WPSM_Emails::notify_admin_new_ticket($post_id);
+            }
+        }, 10, 2);
+
+        add_action('wp_insert_comment', function($comment_id, $comment) {
+            if ($comment->comment_type === 'ticket_reply') {
+                WPSM_Emails::notify_customer_new_reply($comment_id);
+                WPSM_Emails::notify_admin_new_reply($comment_id);
+            }
+        }, 10, 2);
         
         // Load text domain
         load_plugin_textdomain('woo-product-support', false, dirname(WPSM_PLUGIN_BASENAME) . '/languages');
+
     } else {
         add_action('admin_notices', 'wpsm_admin_notice_wc_not_active');
     }
