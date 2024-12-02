@@ -10,6 +10,7 @@ A comprehensive product support ticket system for WooCommerce that enables custo
   - View existing tickets and their status
   - Reply to admin responses
   - Associate tickets with purchased products
+  - eceive email notifications when the admin replies to your ticket
 
 - **Admin Dashboard Integration**
   - Manage all support tickets from WordPress admin
@@ -18,6 +19,8 @@ A comprehensive product support ticket system for WooCommerce that enables custo
   - Change ticket priority (Low, Medium, High, Urgent)
   - View customer and product details
   - Track conversation history
+  - Receive an email when a customer opens a new ticket
+  - Receive an email when a customer replies to a ticket
 
 ## Requirements
 
