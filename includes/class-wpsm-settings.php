@@ -13,6 +13,14 @@ class WPSM_Settings {
         add_filter('plugin_action_links_' . $plugin_base, array(__CLASS__, 'add_plugin_action_links'));
     }
 
+    public static function get_default_settings() {
+        return array(
+            'wpsm_tickets_per_page' => 10,
+            'wpsm_enable_email_notifications' => 1,
+            'wpsm_admin_notification_email' => get_option('admin_email')
+        );
+    }
+
     public static function add_plugin_action_links($links) {
         $settings_link = sprintf(
             '<a href="%s">%s</a>',

@@ -4,14 +4,14 @@ if (!defined('ABSPATH')) {
 }
 
 // Get customer's tickets
-$args = array(
-    'post_type'      => 'support_ticket',
-    'post_status'    => array('ticket_open', 'ticket_in_progress', 'ticket_resolved', 'publish'),
-    'author'         => get_current_user_id(),
-    'posts_per_page' => -1
-);
+// $args = array(
+//     'post_type'      => 'support_ticket',
+//     'post_status'    => array('ticket_open', 'ticket_in_progress', 'ticket_resolved', 'publish'),
+//     'author'         => get_current_user_id(),
+//     // 'posts_per_page' => $tickets,
+// );
 
-$tickets = get_posts($args);
+// $tickets = get_posts($args);
 
 // Leave this for debugging
 // error_log('Found ' . count($tickets) . ' tickets');
@@ -70,6 +70,28 @@ $tickets = get_posts($args);
                 <?php endforeach; ?>
             </tbody>
         </table>
+
+        <?php echo $max_num_pages; ?>
+
+        <?php if ($max_num_pages > 1) : ?>
+            <nav class="woocommerce-pagination">
+                <?php
+                    $base = wc_get_account_endpoint_url('support-tickets');
+                    echo paginate_links(array(
+                        'base' => $base . '%_%',
+                        'format' => '?support_ticket_page=%#%',
+                        'current' => $current_page,
+                        'total' => $max_num_pages,
+                        'prev_text' => '&larr;',
+                        'next_text' => '&rarr;',
+                        'type' => 'list',
+                        'end_size' => 3,
+                        'mid_size' => 3
+                    ));
+                ?>
+            </nav>
+        <?php endif; ?>
+
     <?php endif; ?>
 
     <!-- New Ticket Form -->

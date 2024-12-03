@@ -8,16 +8,32 @@ class WPSM_Emails {
         // No direct initialization needed, ignore this - methods will be called from hooks
     }
 
+    public static function should_send_emails() {
+        $options = get_option('wpsm_settings', WPSM_Settings::get_default_settings());
+        return !empty($options['wpsm_enable_email_notifications']);
+    }
+
+    public static function get_admin_email() {
+        $options = get_option('wpsm_settings', WPSM_Settings::get_default_settings());
+        return !empty($options['wpsm_admin_notification_email']) ? 
+               $options['wpsm_admin_notification_email'] : 
+               get_option('admin_email');
+    }
+
     /**
      * Send notification to admin when new ticket is created
      */
     public static function notify_admin_new_ticket($ticket_id) {
+        if (!self::should_send_emails()) {
+            return;
+        }
+
         $ticket = get_post($ticket_id);
         $customer = get_user_by('id', $ticket->post_author);
         $product_id = get_post_meta($ticket_id, '_ticket_product_id', true);
         $product = wc_get_product($product_id);
         
-        $admin_email = get_option('admin_email');
+        $admin_email = self::get_admin_email();
         $subject = sprintf(__('New Support Ticket: %s', 'woo-product-support'), $ticket->post_title);
         
         $message = sprintf(
@@ -41,6 +57,10 @@ Click here to view and reply: %4$s', 'woo-product-support'),
      * Send notification to customer when admin replies
      */
     public static function notify_customer_new_reply($comment_id) {
+        if (!self::should_send_emails()) {
+            return;
+        }
+
         $comment = get_comment($comment_id);
         $ticket = get_post($comment->comment_post_ID);
         $customer = get_user_by('id', $ticket->post_author);
@@ -72,6 +92,10 @@ Click here to view and respond: %3$s', 'woo-product-support'),
      * Send notification to admin when customer replies
      */
     public static function notify_admin_new_reply($comment_id) {
+        if (!self::should_send_emails()) {
+            return;
+        }
+
         $comment = get_comment($comment_id);
         $ticket = get_post($comment->comment_post_ID);
         
