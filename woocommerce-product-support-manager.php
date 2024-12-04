@@ -20,6 +20,9 @@ define('WPSM_VERSION', '1.0.0');
 define('WPSM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WPSM_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WPSM_PLUGIN_BASENAME', plugin_basename(__FILE__));
+if (!defined('WPSM_PLUGIN_FILE')) {
+    define('WPSM_PLUGIN_FILE', __FILE__);
+}
 
 // Autoload classes
 spl_autoload_register(function ($class_name) {
@@ -87,6 +90,7 @@ function wpsm_init() {
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-admin.php';
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-assets.php';
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-emails.php';
+        require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-settings.php';
         
         // Initialize classes
         WPSM_Post_Types::init();
@@ -96,6 +100,7 @@ function wpsm_init() {
         WPSM_Admin::init();
         WPSM_Assets::init();
         WPSM_Emails::init();
+        WPSM_Settings::init();
 
         // Send email notifications - hooks
         add_action('wp_insert_post', function($post_id, $post) {

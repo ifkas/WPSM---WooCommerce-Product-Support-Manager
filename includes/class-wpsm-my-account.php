@@ -48,6 +48,12 @@ class WPSM_My_Account {
      * Endpoint content
      */
     public static function endpoint_content() {
+        $options = get_option('wpsm_settings', WPSM_Settings::get_default_settings());
+        $tickets_per_page = isset($options['wpsm_tickets_per_page']) ? absint($options['wpsm_tickets_per_page']) : 10;
+
+        error_log('Tickets per page setting: ' . $tickets_per_page); // Debug line
+
+
         // Check if viewing a single ticket
         $ticket_id = isset($_GET['ticket_id']) ? absint($_GET['ticket_id']) : 0;
     
@@ -60,12 +66,36 @@ class WPSM_My_Account {
                 WPSM_PLUGIN_DIR . 'templates/'
             );
         } else {
+            // Update the query to use pagination
+            $current_page = empty($_GET['support_ticket_page']) ? 1 : absint($_GET['support_ticket_page']);
+            
+            $args = array(
+                'post_type' => 'support_ticket',
+                'post_status' => array('ticket_open', 'ticket_in_progress', 'ticket_resolved'),
+                'author' => get_current_user_id(),
+                'posts_per_page' => $tickets_per_page,
+                'paged' => $current_page
+            );
+
+            $tickets_query = new WP_Query($args);
+
+            global $wp_query;
+            $temp_query = $wp_query;
+            $wp_query = $tickets_query;
+
             wc_get_template(
                 'myaccount/support-tickets.php',
-                array(),
+                array(
+                    'tickets' => $tickets_query->posts,
+                    'max_num_pages' => $tickets_query->max_num_pages,
+                    'current_page' => $current_page
+                ),
                 'woocommerce-product-support-manager/',
                 WPSM_PLUGIN_DIR . 'templates/'
             );
+
+            $wp_query = $temp_query;
+            wp_reset_postdata();
         }
     }
     
