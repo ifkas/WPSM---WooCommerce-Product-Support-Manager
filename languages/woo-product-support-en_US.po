@@ -1,0 +1,507 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Product Support Manager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-04 17:28+0000\n"
+"PO-Revision-Date: 2024-12-04 17:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: English (United States)\n"
+"Language: en-US\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.14; wp-6.7.1\n"
+"X-Domain: woo-product-support"
+
+#. URI of the plugin
+msgid "-- || --"
+msgstr ""
+
+#. Description of the plugin
+msgid "A comprehensive product support ticket system for WooCommerce customers"
+msgstr ""
+
+#. 1: ticket title, 2: customer name, 3: reply content
+#: includes/class-wpsm-emails.php:80
+#, php-format
+msgid ""
+"A customer has replied to support ticket: %1$s\n"
+"Customer: %2$s\n"
+"\n"
+"Reply:\n"
+"%3$s\n"
+"\n"
+"Click here to view and respond: %4$s"
+msgstr ""
+
+#. 1: ticket title, 2: reply content
+#: includes/class-wpsm-emails.php:117
+#, php-format
+msgid ""
+"A new reply has been added to your support ticket: %1$s\n"
+"\n"
+"Reply:\n"
+"%2$s\n"
+"\n"
+"Click here to view and respond: %3$s"
+msgstr ""
+
+#. 1: customer name, 2: ticket title, 3: product name
+#: includes/class-wpsm-emails.php:44
+#, php-format
+msgid ""
+"A new support ticket has been created by %1$s\n"
+"\n"
+"Ticket: %2$s\n"
+"Product: %3$s\n"
+"\n"
+"Click here to view and reply: %4$s"
+msgstr ""
+
+#: templates/myaccount/support-tickets.php:42
+msgid "Actions"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:38
+msgid "Add New Ticket"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:21 
+#: includes/class-wpsm-ticket-meta.php:93 
+#: templates/myaccount/single-ticket.php:123
+msgid "Add Reply"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:37
+msgid "Add Ticket"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:36
+msgctxt "Admin menu name"
+msgid "Support Tickets"
+msgstr ""
+
+#: includes/class-wpsm-settings.php:93
+msgid "Admin Notification Email"
+msgstr ""
+
+#: includes/class-wpsm-assets.php:72
+msgid "An error occurred while processing your request."
+msgstr ""
+
+#: includes/class-wpsm-settings.php:127
+msgid "Configure email notification settings."
+msgstr ""
+
+#: includes/class-wpsm-settings.php:123
+msgid "Configure general settings for the support ticket system."
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:55
+msgid "Conversation History"
+msgstr ""
+
+#: includes/class-wpsm-admin.php:39
+msgid "Created"
+msgstr ""
+
+#: templates/myaccount/single-ticket.php:53
+#, php-format
+msgid "Created on: %s"
+msgstr ""
+
+#: includes/class-wpsm-admin.php:30 includes/class-wpsm-ticket-meta.php:74
+msgid "Customer"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:41
+msgid "Customer Details"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:200
+msgid "Customer Since:"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:127
+msgid "Customer:"
+msgstr ""
+
+#: templates/myaccount/support-tickets.php:41
+msgid "Date"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:39
+msgid "Edit"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:40
+msgid "Edit Ticket"
+msgstr ""
+
+#: includes/class-wpsm-settings.php:99
+msgid ""
+"Email address for admin notifications (leave blank to use default admin "
+"email)"
+msgstr ""
+
+#: includes/class-wpsm-settings.php:59
+msgid "Email Notifications"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:194
+msgid "Email:"
+msgstr ""
+
+#: includes/class-wpsm-settings.php:81
+msgid "Enable Email Notifications"
+msgstr ""
+
+#: includes/class-wpsm-admin.php:160
+msgid "Error adding reply"
+msgstr ""
+
+#: includes/class-wpsm-settings.php:51
+msgid "General Settings"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:155 
+#: templates/myaccount/support-tickets.php:131
+msgid "High"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://ivoculic.dev"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:163
+msgid "In Progress"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:85
+#, php-format
+msgid "In Progress <span class=\"count\">(%s)</span>"
+msgid_plural "In Progress <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-wpsm-my-account.php:167
+msgid "Invalid request."
+msgstr ""
+
+#: includes/class-wpsm-admin.php:180
+msgid "Invalid ticket ID"
+msgstr ""
+
+#: templates/myaccount/single-ticket.php:15
+msgid "Invalid ticket or you don't have permission to view this ticket."
+msgstr ""
+
+#. Author of the plugin
+msgid "Ivo Culic"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:153 
+#: templates/myaccount/support-tickets.php:129
+msgid "Low"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:104
+msgid "Mark as Resolved"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:154 
+#: templates/myaccount/support-tickets.php:130
+msgid "Medium"
+msgstr ""
+
+#: templates/myaccount/support-tickets.php:137
+msgid "Message"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:191
+msgid "Name:"
+msgstr ""
+
+#: includes/class-wpsm-emails.php:76
+#, php-format
+msgid "New Customer Reply - Ticket: %s"
+msgstr ""
+
+#: includes/class-wpsm-emails.php:113
+#, php-format
+msgid "New Reply to Your Support Ticket: %s"
+msgstr ""
+
+#: includes/class-wpsm-emails.php:40
+#, php-format
+msgid "New Support Ticket: %s"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:41
+msgid "New Ticket"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:184
+msgid "No customer associated with this ticket."
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:86
+msgid "No replies yet."
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:44
+msgid "No tickets found"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:45
+msgid "No tickets found in trash"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:162
+msgid "Open"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:76
+#, php-format
+msgid "Open <span class=\"count\">(%s)</span>"
+msgid_plural "Open <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-wpsm-admin.php:116 includes/class-wpsm-admin.php:171
+msgid "Permission denied"
+msgstr ""
+
+#: includes/class-wpsm-assets.php:71
+msgid "Please enter a reply message."
+msgstr ""
+
+#: includes/class-wpsm-my-account.php:121
+msgid "Please fill in all required fields."
+msgstr ""
+
+#: includes/class-wpsm-admin.php:125
+msgid "Please provide a reply message"
+msgstr ""
+
+#: includes/class-wpsm-admin.php:32 templates/myaccount/support-tickets.php:127
+msgid "Priority"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:151
+msgid "Priority:"
+msgstr ""
+
+#: includes/class-wpsm-admin.php:31 templates/myaccount/support-tickets.php:39
+msgid "Product"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:35
+msgid "Product Support Ticket"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:34
+msgid "Product Support Tickets"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:139
+msgid "Product:"
+msgstr ""
+
+#: templates/myaccount/support-tickets.php:115
+msgid "Related Product"
+msgstr ""
+
+#: templates/myaccount/single-ticket.php:64
+msgid "Related Product:"
+msgstr ""
+
+#: includes/class-wpsm-admin.php:34 templates/myaccount/single-ticket.php:95
+msgid "Replies"
+msgstr ""
+
+#: includes/class-wpsm-admin.php:157
+msgid "Reply added successfully"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:164
+msgid "Resolved"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:94
+#, php-format
+msgid "Resolved <span class=\"count\">(%s)</span>"
+msgid_plural "Resolved <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-wpsm-post-types.php:43
+msgid "Search Tickets"
+msgstr ""
+
+#: includes/class-wpsm-admin.php:111 includes/class-wpsm-admin.php:166
+msgid "Security check failed"
+msgstr ""
+
+#: templates/myaccount/support-tickets.php:117
+msgid "Select a product"
+msgstr ""
+
+#: includes/class-wpsm-settings.php:87
+msgid "Send email notifications for new tickets and replies"
+msgstr ""
+
+#: includes/class-wpsm-settings.php:28 includes/class-wpsm-settings.php:38
+msgid "Settings"
+msgstr ""
+
+#: templates/myaccount/single-ticket.php:104
+msgid "Staff"
+msgstr ""
+
+#: includes/class-wpsm-admin.php:33 templates/myaccount/support-tickets.php:40
+msgid "Status"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:160
+msgid "Status:"
+msgstr ""
+
+#: includes/class-wpsm-admin.php:29 templates/myaccount/support-tickets.php:110
+msgid "Subject"
+msgstr ""
+
+#: templates/myaccount/support-tickets.php:98
+msgid "Submit New Support Ticket"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:100 
+#: templates/myaccount/single-ticket.php:133
+msgid "Submit Reply"
+msgstr ""
+
+#: templates/myaccount/support-tickets.php:143
+msgid "Submit Ticket"
+msgstr ""
+
+#: includes/class-wpsm-my-account.php:41
+msgid "Support Tickets"
+msgstr ""
+
+#: includes/class-wpsm-my-account.php:199
+msgid "There was an error submitting your reply. Please try again."
+msgstr ""
+
+#: includes/class-wpsm-my-account.php:150
+msgid "There was an error submitting your ticket. Please try again."
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:47
+msgid "This is where support tickets are stored."
+msgstr ""
+
+#: templates/myaccount/support-tickets.php:38
+msgid "Ticket"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:31
+msgid "Ticket Details"
+msgstr ""
+
+#: includes/class-wpsm-admin.php:197
+msgid "Ticket details updated successfully"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:80
+msgctxt "Ticket status"
+msgid "In Progress"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:71
+msgctxt "Ticket status"
+msgid "Open"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:89
+msgctxt "Ticket status"
+msgid "Resolved"
+msgstr ""
+
+#: includes/class-wpsm-settings.php:67
+msgid "Tickets Per Page"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:197
+msgid "Total Orders:"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:169
+msgid "Update Details"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:156 
+#: templates/myaccount/support-tickets.php:132
+msgid "Urgent"
+msgstr ""
+
+#: templates/myaccount/support-tickets.php:66
+msgid "View"
+msgstr ""
+
+#: includes/class-wpsm-ticket-meta.php:206
+msgid "View Customer Profile"
+msgstr ""
+
+#: includes/class-wpsm-post-types.php:42
+msgid "View Ticket"
+msgstr ""
+
+#. Name of the plugin
+msgid "WooCommerce Product Support Manager"
+msgstr ""
+
+#: woocommerce-product-support-manager.php:51 
+#: woocommerce-product-support-manager.php:62
+msgid ""
+"WooCommerce Product Support Manager requires WooCommerce to be installed and "
+"activated."
+msgstr ""
+
+#. Parent slug
+#: includes/class-wpsm-settings.php:37
+msgid "WooCommerce Support Ticket Settings"
+msgstr ""
+
+#: includes/class-wpsm-my-account.php:174
+msgid "You don't have permission to reply to this ticket."
+msgstr ""
+
+#: includes/class-wpsm-my-account.php:115
+msgid "You must be logged in to submit a ticket."
+msgstr ""
+
+#: templates/myaccount/support-tickets.php:104
+msgid "You need to purchase products before you can submit a support ticket."
+msgstr ""
+
+#: templates/myaccount/single-ticket.php:128
+msgid "Your Reply"
+msgstr ""
+
+#: includes/class-wpsm-my-account.php:197
+msgid "Your reply has been submitted successfully."
+msgstr ""
+
+#: includes/class-wpsm-my-account.php:146
+msgid "Your support ticket has been submitted successfully."
+msgstr ""
+
+#: templates/myaccount/support-tickets.php:34
+msgid "Your Support Tickets"
+msgstr ""
+
+#: templates/myaccount/single-ticket.php:36
+msgid "← Back to Tickets"
+msgstr ""

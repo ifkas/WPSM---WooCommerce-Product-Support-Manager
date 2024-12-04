@@ -21,6 +21,7 @@ A comprehensive product support ticket system for WooCommerce that enables custo
   - Track conversation history
   - Receive an email when a customer opens a new ticket
   - Receive an email when a customer replies to a ticket
+  - Settings page (Tickets per page setting, Enable/disable email notifications, Custom admin notification email)
 
 ## Requirements
 
@@ -62,6 +63,10 @@ A comprehensive product support ticket system for WooCommerce that enables custo
    - Change ticket priority
    - View customer details
    - See related product information
+4. Settings page
+   - Tickets per page setting
+   - Enable/disable email notifications
+   - Custom admin notification email
 
 ## Configuration
 
