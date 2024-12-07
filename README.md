@@ -88,3 +88,8 @@ Developed by [Ivo Culic](https://ivoculic.dev)
 - Basic ticket management system
 - Customer support portal
 - Admin dashboard integration
+
+**1.1.0**
+
+- Plugin settings panel
+- Translation ready

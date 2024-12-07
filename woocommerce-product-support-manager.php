@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Product Support Manager
  * Plugin URI: -- || --
  * Description: A comprehensive product support ticket system for WooCommerce customers
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Ivo Culic
  * Author URI: https://ivoculic.dev
  * License: GPL v2 or later
