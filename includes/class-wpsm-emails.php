@@ -3,6 +3,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * Emails class
+ */
+
 class WPSM_Emails {
     public static function init() {
         // No direct initialization needed, ignore this - methods will be called from hooks

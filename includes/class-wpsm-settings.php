@@ -3,6 +3,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * Plugin Settings class
+ */
+
 class WPSM_Settings {
     public static function init() {
         add_action('admin_menu', array(__CLASS__, 'add_settings_menu'));

@@ -3,6 +3,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * Admin class
+ */
+
 class WPSM_Admin {
     
     /**

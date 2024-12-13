@@ -85,7 +85,6 @@ function wpsm_init() {
         // Load required files
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-post-types.php';
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-ticket-meta.php';
-        // require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-ticket-status.php';
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-my-account.php';
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-admin.php';
         require_once WPSM_PLUGIN_DIR . 'includes/class-wpsm-assets.php';
@@ -95,7 +94,6 @@ function wpsm_init() {
         // Initialize classes
         WPSM_Post_Types::init();
         WPSM_Ticket_Meta::init();
-        // WPSM_Ticket_Status::init();
         WPSM_My_Account::init();
         WPSM_Admin::init();
         WPSM_Assets::init();

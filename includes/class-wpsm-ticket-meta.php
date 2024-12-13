@@ -3,11 +3,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * Ticket Meta class
+ */
+
 class WPSM_Ticket_Meta {
     
     public static function init() {
         add_action('add_meta_boxes', array(__CLASS__, 'add_meta_boxes'));
-        // add_action('save_post_support_ticket', array(__CLASS__, 'save_meta_boxes'), 10, 2);
     }
     
     /**
@@ -209,39 +212,6 @@ class WPSM_Ticket_Meta {
         </div>
         <?php
     }
-    
-    /**
-     * Save meta box data
-     */
-    // public static function save_meta_boxes($post_id, $post) {
-    //     // Check if our nonce is set and verify it
-    //     if (!isset($_POST['wpsm_ticket_meta_nonce']) || 
-    //         !wp_verify_nonce($_POST['wpsm_ticket_meta_nonce'], 'wpsm_save_ticket_meta')) {
-    //         return;
-    //     }
-        
-    //     // If this is an autosave, our form has not been submitted
-    //     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-    //         return;
-    //     }
-        
-    //     // Check the user's permissions
-    //     if (!current_user_can('edit_post', $post_id)) {
-    //         return;
-    //     }
-        
-    //     // Save product ID
-    //     if (isset($_POST['ticket_product_id'])) {
-    //         update_post_meta($post_id, '_ticket_product_id', 
-    //             sanitize_text_field($_POST['ticket_product_id']));
-    //     }
-        
-    //     // Save priority
-    //     if (isset($_POST['ticket_priority'])) {
-    //         update_post_meta($post_id, '_ticket_priority', 
-    //             sanitize_text_field($_POST['ticket_priority']));
-    //     }
-    // }
     
     /**
      * Get customer's purchased products

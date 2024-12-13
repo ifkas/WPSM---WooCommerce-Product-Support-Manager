@@ -3,6 +3,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * Template: Single Support Ticket View
+ * /my-account/support-tickets/{ticket_id}
+ */
+
 $ticket_id = isset($_GET['ticket_id']) ? absint($_GET['ticket_id']) : 0;
 $ticket = get_post($ticket_id);
 

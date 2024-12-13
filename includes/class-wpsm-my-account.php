@@ -3,6 +3,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * My Account class
+ */
+
 class WPSM_My_Account {
     
     public static function init() {

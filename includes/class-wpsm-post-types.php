@@ -3,6 +3,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * Post Types class
+ */
+
 class WPSM_Post_Types {
     
     public static function init() {

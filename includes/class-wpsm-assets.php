@@ -3,6 +3,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * Assets class
+ */
+
 class WPSM_Assets {
 
     public static function init() {

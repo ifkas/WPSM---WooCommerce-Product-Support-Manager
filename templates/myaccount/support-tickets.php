@@ -3,29 +3,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Get customer's tickets
-// $args = array(
-//     'post_type'      => 'support_ticket',
-//     'post_status'    => array('ticket_open', 'ticket_in_progress', 'ticket_resolved', 'publish'),
-//     'author'         => get_current_user_id(),
-//     // 'posts_per_page' => $tickets,
-// );
-
-// $tickets = get_posts($args);
-
-// Leave this for debugging
-// error_log('Found ' . count($tickets) . ' tickets');
-
-// $debug_args = array(
-//     'post_type'      => 'support_ticket',
-//     'post_status'    => 'any',
-//     'author'         => get_current_user_id(),
-//     'posts_per_page' => -1
-// );
-// $all_tickets = get_posts($debug_args);
-// foreach ($all_tickets as $ticket) {
-//     error_log('Ticket ID: ' . $ticket->ID . ' Status: ' . get_post_status($ticket->ID));
-// }
+/**
+ * Template: Support Tickets
+ * /my-account/support-tickets
+ */
 ?>
 
 <div class="wpsm-support-tickets">
